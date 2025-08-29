@@ -303,32 +303,17 @@
                     <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="">
                         전체 과목
                     </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 개론">
-                        📊 빅데이터 개론<br><span class="text-xs text-gray-500">(76개)</span>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 분석기획">
+                        📋 빅데이터 분석기획<br><span class="text-xs text-gray-500">(177개)</span>
                     </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 기획">
-                        📋 빅데이터 기획<br><span class="text-xs text-gray-500">(76개)</span>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 탐색">
+                        🔍 빅데이터 탐색<br><span class="text-xs text-gray-500">(4개)</span>
                     </button>
                     <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 모델링">
-                        🔧 빅데이터 모델링<br><span class="text-xs text-gray-500">(76개)</span>
+                        🔧 빅데이터 모델링<br><span class="text-xs text-gray-500">(80개)</span>
                     </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 결과해석">
-                        📈 빅데이터 결과해석<br><span class="text-xs text-gray-500">(72개)</span>
-                    </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="데이터 시각화">
-                        📊 데이터 시각화<br><span class="text-xs text-gray-500">(3개)</span>
-                    </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="딥러닝">
-                        🧠 딥러닝<br><span class="text-xs text-gray-500">(2개)</span>
-                    </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="시계열분석">
-                        ⏰ 시계열분석<br><span class="text-xs text-gray-500">(1개)</span>
-                    </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="통계">
-                        📊 통계<br><span class="text-xs text-gray-500">(1개)</span>
-                    </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="회귀분석">
-                        📈 회귀분석<br><span class="text-xs text-gray-500">(1개)</span>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 결과 해석">
+                        📈 빅데이터 결과 해석<br><span class="text-xs text-gray-500">(72개)</span>
                     </button>
                 </div>
             </div>
@@ -473,7 +458,7 @@
                                 <span class="difficulty-star text-xl">${getDifficultyStars(questionData.difficulty_level)}</span>
                                 ${questionData.type === "기출문제" ? `<span class="official-badge bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg border-2 border-red-400 animate-pulse">🔥 기출문제</span>` : ''}
                                 ${questionData.section && questionData.section !== "" ? `<span class="section-badge bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-md">📚 ${questionData.section}</span>` : ''}
-                                ${questionData.year ? `<span class="year-badge bg-blue-500 text-white px-2 py-1 rounded text-xs">${questionData.year}년 ${questionData.round}회</span>` : ''}
+                                ${questionData.year ? `<span class="year-badge bg-blue-500 text-white px-2 py-1 rounded text-xs">${questionData.year}년 ${questionData.exam_round}</span>` : ''}
                             </div>
                             ${wrongCountForQuestion > 0 ? `<div class="wrong-count-badge">틀린 횟수: ${wrongCountForQuestion}</div>` : ''}
                         </div>
