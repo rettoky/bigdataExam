@@ -223,6 +223,7 @@
             <button id="restart-btn" class="bg-stone-500 hover:bg-stone-600 text-white font-bold py-2 px-4 rounded-full transition-colors">처음으로</button>
             <button id="show-all-btn" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full transition-colors">전체보기</button>
             <button id="filter-btn" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full transition-colors">난이도별</button>
+            <button id="subject-filter-btn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full transition-colors">과목별</button>
         </div>
         <p class="text-center text-xs text-stone-500 mt-3">좌우 스와이프 또는 화면 좌우 클릭으로 문제를 넘길 수 있습니다.</p>
     </footer>
@@ -246,7 +247,7 @@
 
     <!-- Filter Modal -->
     <div id="filter-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 hidden">
-        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-md flex flex-col">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-lg flex flex-col">
             <div class="flex justify-between items-center p-5 border-b border-stone-200">
                 <h2 class="text-xl font-bold text-purple-600">난이도별 필터</h2>
                 <button id="filter-close-btn" class="text-stone-400 hover:text-stone-600">
@@ -256,30 +257,78 @@
                 </button>
             </div>
             <div class="p-6">
-                <div class="space-y-4">
-                    <button class="filter-option w-full text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="0">
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="0">
                         전체 문제
                     </button>
-                    <button class="filter-option w-full text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="1">
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="1">
                         <span class="difficulty-star">★</span> 쉬움
                     </button>
-                    <button class="filter-option w-full text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="2">
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="2">
                         <span class="difficulty-star">★★</span> 보통
                     </button>
-                    <button class="filter-option w-full text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="3">
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="3">
                         <span class="difficulty-star">★★★</span> 어려움
                     </button>
-                    <button class="filter-option w-full text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="4">
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="4">
                         <span class="difficulty-star">★★★★</span> 매우 어려움
                     </button>
-                    <button class="filter-option w-full text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="5">
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="5">
                         <span class="difficulty-star">★★★★★</span> 최고 난이도
                     </button>
-                    <button class="filter-option w-full text-left p-3 rounded-lg border-2 border-red-200 bg-red-50 hover:border-red-400 hover:bg-red-100 transition-colors" data-difficulty="official">
-                        <span class="text-red-600 font-bold text-lg">🔥 기출문제</span> - 실제 시험 출제 문제
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-red-200 bg-red-50 hover:border-red-400 hover:bg-red-100 transition-colors" data-difficulty="official">
+                        <span class="text-red-600 font-bold">🔥 기출문제</span>
                     </button>
-                    <button class="filter-option w-full text-left p-3 rounded-lg border-2 border-red-200 bg-red-50 hover:border-red-400 hover:bg-red-100 transition-colors" data-difficulty="-1">
-                        <span class="text-red-600 font-bold">📝 오답노트</span> - 틀린 문제만
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-red-200 bg-red-50 hover:border-red-400 hover:bg-red-100 transition-colors" data-difficulty="-1">
+                        <span class="text-red-600 font-bold">📝 오답노트</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subject Filter Modal -->
+    <div id="subject-filter-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 hidden">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col">
+            <div class="flex justify-between items-center p-5 border-b border-stone-200">
+                <h2 class="text-xl font-bold text-orange-600">과목별 필터</h2>
+                <button id="subject-filter-close-btn" class="text-stone-400 hover:text-stone-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="">
+                        전체 과목
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 개론">
+                        📊 빅데이터 개론<br><span class="text-xs text-gray-500">(76개)</span>
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 기획">
+                        📋 빅데이터 기획<br><span class="text-xs text-gray-500">(76개)</span>
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 모델링">
+                        🔧 빅데이터 모델링<br><span class="text-xs text-gray-500">(76개)</span>
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 결과해석">
+                        📈 빅데이터 결과해석<br><span class="text-xs text-gray-500">(72개)</span>
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="데이터 시각화">
+                        📊 데이터 시각화<br><span class="text-xs text-gray-500">(3개)</span>
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="딥러닝">
+                        🧠 딥러닝<br><span class="text-xs text-gray-500">(2개)</span>
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="시계열분석">
+                        ⏰ 시계열분석<br><span class="text-xs text-gray-500">(1개)</span>
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="통계">
+                        📊 통계<br><span class="text-xs text-gray-500">(1개)</span>
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="회귀분석">
+                        📈 회귀분석<br><span class="text-xs text-gray-500">(1개)</span>
                     </button>
                 </div>
             </div>
@@ -345,6 +394,7 @@
             const wrongCount = document.getElementById('wrong-count');
             const resetProgressBtn = document.getElementById('reset-progress-btn');
             const filterBtn = document.getElementById('filter-btn');
+            const subjectFilterBtn = document.getElementById('subject-filter-btn');
             
             // Modals
             const wrongNotesModal = document.getElementById('wrong-notes-modal');
@@ -352,6 +402,8 @@
             const wrongNotesCloseBtn = document.getElementById('wrong-notes-close-btn');
             const filterModal = document.getElementById('filter-modal');
             const filterCloseBtn = document.getElementById('filter-close-btn');
+            const subjectFilterModal = document.getElementById('subject-filter-modal');
+            const subjectFilterCloseBtn = document.getElementById('subject-filter-close-btn');
             
             // UI Toggle
             const headerToggleBtn = document.getElementById('header-toggle-btn');
@@ -416,10 +468,11 @@
                 questionElement.innerHTML = `
                     <div class="mb-6">
                         <div class="flex justify-between items-start mb-4">
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-3 flex-wrap">
                                 <span class="text-2xl font-bold text-cyan-600">Q${currentQuestionIndex + 1}</span>
                                 <span class="difficulty-star text-xl">${getDifficultyStars(questionData.difficulty_level)}</span>
                                 ${questionData.type === "기출문제" ? `<span class="official-badge bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg border-2 border-red-400 animate-pulse">🔥 기출문제</span>` : ''}
+                                ${questionData.section && questionData.section !== "" ? `<span class="section-badge bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-md">📚 ${questionData.section}</span>` : ''}
                                 ${questionData.year ? `<span class="year-badge bg-blue-500 text-white px-2 py-1 rounded text-xs">${questionData.year}년 ${questionData.round}회</span>` : ''}
                             </div>
                             ${wrongCountForQuestion > 0 ? `<div class="wrong-count-badge">틀린 횟수: ${wrongCountForQuestion}</div>` : ''}
@@ -602,29 +655,45 @@
                 }, 200);
             };
 
-            const applyFilter = (difficulty) => {
-                currentFilter = difficulty;
-                if (difficulty === 0) {
-                    filteredQuestions = [...questionOrder];
-                } else if (difficulty === -1) {
-                    // 오답노트 필터
-                    const wrongIds = Object.keys(wrongAnswers).map(id => parseInt(id));
-                    filteredQuestions = questionOrder.filter(index => wrongIds.includes(index));
-                    if (filteredQuestions.length === 0) {
-                        alert('틀린 문제가 없습니다! 🎉');
+            const applyFilter = (filterValue, filterType = 'difficulty') => {
+                if (filterType === 'difficulty') {
+                    currentFilter = filterValue;
+                    if (filterValue === 0) {
                         filteredQuestions = [...questionOrder];
-                        currentFilter = 0;
+                    } else if (filterValue === -1) {
+                        // 오답노트 필터
+                        const wrongIds = Object.keys(wrongAnswers).map(id => parseInt(id));
+                        filteredQuestions = questionOrder.filter(index => wrongIds.includes(index));
+                        if (filteredQuestions.length === 0) {
+                            alert('틀린 문제가 없습니다! 🎉');
+                            filteredQuestions = [...questionOrder];
+                            currentFilter = 0;
+                        }
+                    } else if (filterValue === 'official') {
+                        // 기출문제 필터
+                        filteredQuestions = questionOrder.filter(index => questions[index].type === "기출문제");
+                        if (filteredQuestions.length === 0) {
+                            alert('기출문제가 없습니다!');
+                            filteredQuestions = [...questionOrder];
+                            currentFilter = 0;
+                        }
+                    } else {
+                        filteredQuestions = questionOrder.filter(index => questions[index].difficulty_level === filterValue);
                     }
-                } else if (difficulty === 'official') {
-                    // 기출문제 필터
-                    filteredQuestions = questionOrder.filter(index => questions[index].type === "기출문제");
-                    if (filteredQuestions.length === 0) {
-                        alert('기출문제가 없습니다!');
+                } else if (filterType === 'subject') {
+                    // 과목별 필터
+                    if (filterValue === "") {
                         filteredQuestions = [...questionOrder];
-                        currentFilter = 0;
+                    } else {
+                        filteredQuestions = questionOrder.filter(index => {
+                            const question = questions[index];
+                            return question.section === filterValue;
+                        });
+                        if (filteredQuestions.length === 0) {
+                            alert(`${filterValue} 과목의 문제가 없습니다!`);
+                            filteredQuestions = [...questionOrder];
+                        }
                     }
-                } else {
-                    filteredQuestions = questionOrder.filter(index => questions[index].difficulty_level === difficulty);
                 }
                 currentQuestionIndex = 0;
                 renderQuestion();
@@ -646,6 +715,22 @@
                 }, 200);
             };
 
+            const showSubjectFilterModal = () => {
+                subjectFilterModal.classList.remove('hidden');
+                subjectFilterModal.classList.add('modal-enter');
+                requestAnimationFrame(() => {
+                    subjectFilterModal.classList.add('modal-enter-active');
+                });
+            };
+
+            const hideSubjectFilterModal = () => {
+                subjectFilterModal.classList.remove('modal-enter-active');
+                subjectFilterModal.classList.remove('modal-enter');
+                setTimeout(() => {
+                    subjectFilterModal.classList.add('hidden');
+                }, 200);
+            };
+
             // --- EVENT LISTENERS ---
             prevBtn.addEventListener('click', () => navigate(-1));
             nextBtn.addEventListener('click', () => navigate(1));
@@ -657,6 +742,7 @@
             });
             resetProgressBtn.addEventListener('click', resetProgress);
             filterBtn.addEventListener('click', showFilterModal);
+            subjectFilterBtn.addEventListener('click', showSubjectFilterModal);
 
             // Modal event listeners
             wrongNotesCloseBtn.addEventListener('click', hideWrongNotes);
@@ -667,6 +753,11 @@
             filterCloseBtn.addEventListener('click', hideFilterModal);
             filterModal.addEventListener('click', (e) => {
                 if (e.target === filterModal) hideFilterModal();
+            });
+
+            subjectFilterCloseBtn.addEventListener('click', hideSubjectFilterModal);
+            subjectFilterModal.addEventListener('click', (e) => {
+                if (e.target === subjectFilterModal) hideSubjectFilterModal();
             });
 
             // Filter options
@@ -683,6 +774,15 @@
                     
                     applyFilter(difficulty);
                     hideFilterModal();
+                });
+            });
+
+            // Subject filter options
+            document.querySelectorAll('.subject-filter-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const subject = option.dataset.subject;
+                    applyFilter(subject, 'subject');
+                    hideSubjectFilterModal();
                 });
             });
 
