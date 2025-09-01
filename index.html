@@ -262,22 +262,25 @@
                         전체 문제
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="1">
-                        <span class="difficulty-star">★</span> 쉬움
+                        <span class="difficulty-star">★</span> 쉬움<br><span class="text-xs text-gray-500">(194개)</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="2">
-                        <span class="difficulty-star">★★</span> 보통
+                        <span class="difficulty-star">★★</span> 보통<br><span class="text-xs text-gray-500">(203개)</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="3">
-                        <span class="difficulty-star">★★★</span> 어려움
+                        <span class="difficulty-star">★★★</span> 중급<br><span class="text-xs text-gray-500">(534개 - 기출문제 포함)</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="4">
-                        <span class="difficulty-star">★★★★</span> 매우 어려움
+                        <span class="difficulty-star">★★★★</span> 어려움<br><span class="text-xs text-gray-500">(210개)</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="5">
-                        <span class="difficulty-star">★★★★★</span> 최고 난이도
+                        <span class="difficulty-star">★★★★★</span> 매우 어려움<br><span class="text-xs text-gray-500">(201개)</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-red-200 bg-red-50 hover:border-red-400 hover:bg-red-100 transition-colors" data-difficulty="official">
-                        <span class="text-red-600 font-bold">🔥 기출문제</span>
+                        <span class="text-red-600 font-bold">🔥 기출문제 (342개)</span>
+                    </button>
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-blue-200 bg-blue-50 hover:border-blue-400 hover:bg-blue-100 transition-colors" data-difficulty="predicted">
+                        <span class="text-blue-600 font-bold">📝 예상문제 (1000개)</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-red-200 bg-red-50 hover:border-red-400 hover:bg-red-100 transition-colors" data-difficulty="-1">
                         <span class="text-red-600 font-bold">📝 오답노트</span>
@@ -303,19 +306,37 @@
                     <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="">
                         전체 과목
                     </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 분석기획">
-                        📋 빅데이터 분석기획<br><span class="text-xs text-gray-500">(177개)</span>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 분석 기획">
+                        📋 빅데이터 분석 기획<br><span class="text-xs text-gray-500">(55개)</span>
                     </button>
                     <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 탐색">
-                        🔍 빅데이터 탐색<br><span class="text-xs text-gray-500">(4개)</span>
+                        🔍 빅데이터 탐색<br><span class="text-xs text-gray-500">(87개)</span>
                     </button>
                     <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 모델링">
-                        🔧 빅데이터 모델링<br><span class="text-xs text-gray-500">(80개)</span>
+                        🔧 빅데이터 모델링<br><span class="text-xs text-gray-500">(92개)</span>
                     </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 결과 해석">
-                        📈 빅데이터 결과 해석<br><span class="text-xs text-gray-500">(72개)</span>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 결과해석">
+                        📈 빅데이터 결과해석<br><span class="text-xs text-gray-500">(78개)</span>
+                    </button>
+                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 분석기획">
+                        🗂️ 빅데이터 분석기획<br><span class="text-xs text-gray-500">(20개)</span>
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 hidden">
+        <div class="relative max-w-[90vw] max-h-[90vh]">
+            <button id="image-modal-close" class="absolute -top-10 right-0 text-white hover:text-gray-300 text-2xl z-60">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <img id="modal-image" src="" alt="문제 이미지" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+            <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-3 text-center text-sm">
+                클릭하거나 ESC 키를 눌러 닫기
             </div>
         </div>
     </div>
@@ -324,7 +345,7 @@
         // 데이터 로딩 함수
         async function loadQuestions() {
             try {
-                const response = await fetch('questions.json');
+                const response = await fetch('questions_merged.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -340,7 +361,7 @@
                         <div class="text-center p-8">
                             <h1 class="text-2xl font-bold text-red-600 mb-4">데이터 로딩 오류</h1>
                             <p class="text-gray-700">문제 데이터를 불러올 수 없습니다.</p>
-                            <p class="text-gray-600 text-sm mt-2">questions.json 파일이 존재하는지 확인해주세요.</p>
+                            <p class="text-gray-600 text-sm mt-2">questions_merged.json 파일이 존재하는지 확인해주세요.</p>
                         </div>
                     </div>
                 `;
@@ -463,6 +484,14 @@
                             ${wrongCountForQuestion > 0 ? `<div class="wrong-count-badge">틀린 횟수: ${wrongCountForQuestion}</div>` : ''}
                         </div>
                         <h2 class="text-xl md:text-2xl font-bold leading-relaxed text-stone-800">${questionData.question}</h2>
+                        ${questionData.image ? `<div class="mt-4">
+                            <img src="img/${questionData.image}" 
+                                 alt="문제 이미지" 
+                                 class="max-w-full h-auto rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow border border-gray-200"
+                                 onclick="showImageModal('img/${questionData.image}')"
+                                 style="max-height: 400px; object-fit: contain;">
+                            <p class="text-xs text-gray-500 mt-2 text-center">이미지를 클릭하면 크게 볼 수 있습니다</p>
+                        </div>` : ''}
                     </div>
                     <div class="space-y-3" id="options-container">
                         ${questionData.options.map((option, index) => `
@@ -473,10 +502,13 @@
                             </button>
                         `).join('')}
                     </div>
-                    <div id="explanation" class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-xl hidden">
+                    ${questionData.explanation ? `<div id="explanation" class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-xl hidden">
                         <h3 class="font-bold text-blue-800 mb-2">설명</h3>
                         <p class="text-blue-700 leading-relaxed">${questionData.explanation}</p>
-                    </div>
+                    </div>` : `<div id="explanation" class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-xl hidden">
+                        <h3 class="font-bold text-yellow-800 mb-2">정답</h3>
+                        <p class="text-yellow-700 leading-relaxed">정답: ${['①', '②', '③', '④'][questionData.correct]} ${questionData.options[questionData.correct]}</p>
+                    </div>`}
                 `;
 
                 questionContainer.appendChild(questionElement);
@@ -541,8 +573,11 @@
                     }
                 }
 
-                // 설명 표시
-                document.getElementById('explanation').classList.remove('hidden');
+                // 설명 또는 정답 표시
+                const explanationDiv = document.getElementById('explanation');
+                if (explanationDiv) {
+                    explanationDiv.classList.remove('hidden');
+                }
 
                 saveProgress();
                 updateWrongCount();
@@ -662,6 +697,14 @@
                             filteredQuestions = [...questionOrder];
                             currentFilter = 0;
                         }
+                    } else if (filterValue === 'predicted') {
+                        // 예상문제 필터
+                        filteredQuestions = questionOrder.filter(index => questions[index].type === "예상문제");
+                        if (filteredQuestions.length === 0) {
+                            alert('예상문제가 없습니다!');
+                            filteredQuestions = [...questionOrder];
+                            currentFilter = 0;
+                        }
                     } else {
                         filteredQuestions = questionOrder.filter(index => questions[index].difficulty_level === filterValue);
                     }
@@ -715,6 +758,35 @@
                     subjectFilterModal.classList.add('hidden');
                 }, 200);
             };
+
+            // --- IMAGE MODAL FUNCTIONS ---
+            const showImageModal = (imageSrc) => {
+                const imageModal = document.getElementById('image-modal');
+                const modalImage = document.getElementById('modal-image');
+                
+                modalImage.src = imageSrc;
+                modalImage.onerror = function() {
+                    this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzZiNzI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuydtOuvuOyngCDroa3rkJzsnZEg7Iak7IqtPC90ZXh0Pjwvc3ZnPg==';
+                };
+                
+                imageModal.classList.remove('hidden');
+                imageModal.classList.add('modal-enter');
+                requestAnimationFrame(() => {
+                    imageModal.classList.add('modal-enter-active');
+                });
+            };
+
+            const hideImageModal = () => {
+                const imageModal = document.getElementById('image-modal');
+                imageModal.classList.remove('modal-enter-active');
+                imageModal.classList.remove('modal-enter');
+                setTimeout(() => {
+                    imageModal.classList.add('hidden');
+                }, 200);
+            };
+
+            // Make showImageModal globally accessible
+            window.showImageModal = showImageModal;
 
             // --- EVENT LISTENERS ---
             prevBtn.addEventListener('click', () => navigate(-1));
@@ -775,6 +847,18 @@
             headerToggleBtn.addEventListener('click', () => appHeader.classList.toggle('is-visible'));
             footerToggleBtn.addEventListener('click', () => appFooter.classList.toggle('is-visible'));
 
+            // Image Modal Listeners
+            const imageModalCloseBtn = document.getElementById('image-modal-close');
+            const imageModal = document.getElementById('image-modal');
+            
+            imageModalCloseBtn.addEventListener('click', hideImageModal);
+            
+            imageModal.addEventListener('click', (e) => {
+                if (e.target === imageModal) {
+                    hideImageModal();
+                }
+            });
+
             // Swipe navigation
             let touchStartX = 0;
             let touchEndX = 0;
@@ -825,6 +909,15 @@
 
             // Keyboard navigation
             document.addEventListener('keydown', (e) => {
+                // ESC 키로 이미지 모달 닫기
+                if (e.key === 'Escape') {
+                    const imageModal = document.getElementById('image-modal');
+                    if (!imageModal.classList.contains('hidden')) {
+                        hideImageModal();
+                        return;
+                    }
+                }
+                
                 if (e.key === 'ArrowLeft') {
                     navigate(-1);
                 } else if (e.key === 'ArrowRight') {
