@@ -268,7 +268,7 @@
                         <span class="difficulty-star">★★</span> 보통<br><span class="text-xs text-gray-500">(203개)</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="3">
-                        <span class="difficulty-star">★★★</span> 중급<br><span class="text-xs text-gray-500">(534개 - 기출문제 포함)</span>
+                        <span class="difficulty-star">★★★</span> 중급 (예상문제만)<br><span class="text-xs text-gray-500">(192개)</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-purple-400 hover:bg-purple-50 transition-colors" data-difficulty="4">
                         <span class="difficulty-star">★★★★</span> 어려움<br><span class="text-xs text-gray-500">(210개)</span>
@@ -277,10 +277,12 @@
                         <span class="difficulty-star">★★★★★</span> 매우 어려움<br><span class="text-xs text-gray-500">(201개)</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-red-200 bg-red-50 hover:border-red-400 hover:bg-red-100 transition-colors" data-difficulty="official">
-                        <span class="text-red-600 font-bold">🔥 기출문제 (342개)</span>
+                        <span class="text-red-600 font-bold">🔥 기출문제 (342개)</span><br>
+                        <span class="text-xs text-red-500">과목별 필터와 함께 사용 가능</span>
                     </button>
-                    <button class="filter-option text-left p-3 rounded-lg border-2 border-blue-200 bg-blue-50 hover:border-blue-400 hover:bg-blue-100 transition-colors" data-difficulty="predicted">
-                        <span class="text-blue-600 font-bold">📝 예상문제 (1000개)</span>
+                    <button class="filter-option text-left p-3 rounded-lg border-2 border-blue-200 bg-blue-50 hover:border-blue-400 hover:bg-blue-100 transition-colors" data-difficulty="predicted" onclick="showPredictedDifficultyModal()">
+                        <span class="text-blue-600 font-bold">📝 예상문제 (1000개)</span><br>
+                        <span class="text-xs text-blue-500">클릭하여 예상문제 난이도별 선택</span>
                     </button>
                     <button class="filter-option text-left p-3 rounded-lg border-2 border-red-200 bg-red-50 hover:border-red-400 hover:bg-red-100 transition-colors" data-difficulty="-1">
                         <span class="text-red-600 font-bold">📝 오답노트</span>
@@ -307,19 +309,52 @@
                         전체 과목
                     </button>
                     <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 분석 기획">
-                        📋 빅데이터 분석 기획<br><span class="text-xs text-gray-500">(55개)</span>
+                        📋 빅데이터 분석 기획<br><span class="text-xs text-gray-500">(325개 - 기출 75개 + 예상 250개)</span>
                     </button>
                     <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 탐색">
-                        🔍 빅데이터 탐색<br><span class="text-xs text-gray-500">(87개)</span>
+                        🔍 빅데이터 탐색<br><span class="text-xs text-gray-500">(337개 - 기출 87개 + 예상 250개)</span>
                     </button>
                     <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 모델링">
-                        🔧 빅데이터 모델링<br><span class="text-xs text-gray-500">(92개)</span>
+                        🔧 빅데이터 모델링<br><span class="text-xs text-gray-500">(342개 - 기출 92개 + 예상 250개)</span>
                     </button>
                     <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 결과해석">
-                        📈 빅데이터 결과해석<br><span class="text-xs text-gray-500">(78개)</span>
+                        📈 빅데이터 결과해석<br><span class="text-xs text-gray-500">(328개 - 기출 78개 + 예상 250개)</span>
                     </button>
-                    <button class="subject-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-orange-400 hover:bg-orange-50 transition-colors" data-subject="빅데이터 분석기획">
-                        🗂️ 빅데이터 분석기획<br><span class="text-xs text-gray-500">(20개)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Predicted Questions Difficulty Modal -->
+    <div id="predicted-difficulty-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 hidden">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-lg flex flex-col">
+            <div class="flex justify-between items-center p-5 border-b border-stone-200">
+                <h2 class="text-xl font-bold text-blue-600">📝 예상문제 난이도 선택</h2>
+                <button id="predicted-difficulty-close-btn" class="text-stone-400 hover:text-stone-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="predicted-difficulty-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" data-type="predicted" data-difficulty="0">
+                        <span class="text-blue-600 font-bold">모든 예상문제</span><br><span class="text-xs text-gray-500">(1000개)</span>
+                    </button>
+                    <button class="predicted-difficulty-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" data-type="predicted" data-difficulty="1">
+                        <span class="difficulty-star">★</span> 쉬움<br><span class="text-xs text-gray-500">(194개)</span>
+                    </button>
+                    <button class="predicted-difficulty-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" data-type="predicted" data-difficulty="2">
+                        <span class="difficulty-star">★★</span> 보통<br><span class="text-xs text-gray-500">(203개)</span>
+                    </button>
+                    <button class="predicted-difficulty-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" data-type="predicted" data-difficulty="3">
+                        <span class="difficulty-star">★★★</span> 중급<br><span class="text-xs text-gray-500">(192개)</span>
+                    </button>
+                    <button class="predicted-difficulty-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" data-type="predicted" data-difficulty="4">
+                        <span class="difficulty-star">★★★★</span> 어려움<br><span class="text-xs text-gray-500">(210개)</span>
+                    </button>
+                    <button class="predicted-difficulty-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" data-type="predicted" data-difficulty="5">
+                        <span class="difficulty-star">★★★★★</span> 매우 어려움<br><span class="text-xs text-gray-500">(201개)</span>
                     </button>
                 </div>
             </div>
@@ -717,7 +752,15 @@
                             currentFilter = 0;
                         }
                     } else {
-                        filteredQuestions = questionOrder.filter(index => questions[index].difficulty_level === filterValue);
+                        // 난이도 3(중급)의 경우 예상문제만 포함
+                        if (filterValue === 3) {
+                            filteredQuestions = questionOrder.filter(index => 
+                                questions[index].difficulty_level === filterValue && 
+                                questions[index].type === "예상문제"
+                            );
+                        } else {
+                            filteredQuestions = questionOrder.filter(index => questions[index].difficulty_level === filterValue);
+                        }
                     }
                 } else if (filterType === 'subject') {
                     // 과목별 필터
@@ -799,6 +842,45 @@
             // Make showImageModal globally accessible
             window.showImageModal = showImageModal;
 
+            // --- PREDICTED DIFFICULTY MODAL FUNCTIONS ---
+            const showPredictedDifficultyModal = () => {
+                hideFilterModal(); // 기본 필터 모달 닫기
+                const predictedDifficultyModal = document.getElementById('predicted-difficulty-modal');
+                predictedDifficultyModal.classList.remove('hidden');
+                predictedDifficultyModal.classList.add('modal-enter');
+                requestAnimationFrame(() => {
+                    predictedDifficultyModal.classList.add('modal-enter-active');
+                });
+            };
+
+            const hidePredictedDifficultyModal = () => {
+                const predictedDifficultyModal = document.getElementById('predicted-difficulty-modal');
+                predictedDifficultyModal.classList.remove('modal-enter-active');
+                predictedDifficultyModal.classList.remove('modal-enter');
+                setTimeout(() => {
+                    predictedDifficultyModal.classList.add('hidden');
+                }, 200);
+            };
+
+            // 새로운 필터 함수 - 문제 유형과 난이도를 함께 필터링
+            const applyPredictedFilter = (type, difficulty) => {
+                if (difficulty === 0) {
+                    // 모든 예상문제
+                    filteredQuestions = questionOrder.filter(index => questions[index].type === "예상문제");
+                } else {
+                    // 예상문제 중 특정 난이도
+                    filteredQuestions = questionOrder.filter(index => 
+                        questions[index].type === "예상문제" && 
+                        questions[index].difficulty_level === difficulty
+                    );
+                }
+                currentQuestionIndex = 0;
+                renderQuestion();
+            };
+
+            // Make functions globally accessible
+            window.showPredictedDifficultyModal = showPredictedDifficultyModal;
+
             // --- EVENT LISTENERS ---
             prevBtn.addEventListener('click', () => navigate(-1));
             nextBtn.addEventListener('click', () => navigate(1));
@@ -836,6 +918,9 @@
                     
                     if (difficultyValue === 'official') {
                         difficulty = 'official';
+                    } else if (difficultyValue === 'predicted') {
+                        // 예상문제는 별도 모달에서 처리하므로 여기서는 아무것도 하지 않음
+                        return;
                     } else {
                         difficulty = parseInt(difficultyValue);
                     }
@@ -868,6 +953,28 @@
                 if (e.target === imageModal) {
                     hideImageModal();
                 }
+            });
+
+            // Predicted Difficulty Modal Listeners
+            const predictedDifficultyCloseBtn = document.getElementById('predicted-difficulty-close-btn');
+            const predictedDifficultyModal = document.getElementById('predicted-difficulty-modal');
+            
+            predictedDifficultyCloseBtn.addEventListener('click', hidePredictedDifficultyModal);
+            
+            predictedDifficultyModal.addEventListener('click', (e) => {
+                if (e.target === predictedDifficultyModal) {
+                    hidePredictedDifficultyModal();
+                }
+            });
+
+            // Predicted difficulty options
+            document.querySelectorAll('.predicted-difficulty-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const type = option.dataset.type;
+                    const difficulty = parseInt(option.dataset.difficulty);
+                    applyPredictedFilter(type, difficulty);
+                    hidePredictedDifficultyModal();
+                });
             });
 
             // Swipe navigation

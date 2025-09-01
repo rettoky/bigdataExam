@@ -3332,7 +3332,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 1,
     "question": "빅데이터 분석 기획 과정의 WBS를 작성하는 단계는?",
     "image": null,
@@ -3350,7 +3350,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 2,
     "question": "CRISP-DM 방법론의 프로세스는?",
     "image": null,
@@ -3368,7 +3368,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 3,
     "question": "인공지능, 머신러닝, 딥러닝의 상호관계는?",
     "image": null,
@@ -3386,7 +3386,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 4,
     "question": "관계형 데이터베이스 기반 구조를 하둡 기반으로 전환하고, 이를 모니터링하는 직무는?",
     "image": null,
@@ -3404,7 +3404,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 5,
     "question": "개인정보 비식별화 조치에 대한 설명은?",
     "image": null,
@@ -3422,7 +3422,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 6,
     "question": "데이터 품질진단 절차에서 데이터를 측정하고 분석하여 수치를 산출하는 단계는?",
     "image": null,
@@ -3440,7 +3440,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 7,
     "question": "개인정보보호법 관련 설명은?",
     "image": null,
@@ -3458,7 +3458,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 8,
     "question": "관계형 데이터처럼 테이블 형태로 구조화되어 있지 않지만, 메타데이터의 특성을 갖고 있는 데이터는?",
     "image": null,
@@ -3476,7 +3476,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 9,
     "question": "총계 처리 기법의 단점은?",
     "image": null,
@@ -3494,7 +3494,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 10,
     "question": "자료 수집 방법에 대한 설명은?",
     "image": null,
@@ -3511,7 +3511,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 11,
     "question": "데이터 수집 기술에 대한 설명은?",
     "image": null,
@@ -3529,7 +3529,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 12,
     "question": "특정 분야에서 학습된 신경망을 다른 분야의 신경망 학습에 활용하는 방법은?",
     "image": null,
@@ -3547,7 +3547,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 13,
     "question": "데이터 분석 방법론 프로세스에서 데이터를 이해하고 수집하는 단계는?",
     "image": null,
@@ -3565,7 +3565,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 14,
     "question": "데이터 및 자원 할당 관리, 빅데이터 어플리케이션 실행을 위한 서비스를 제공하는 빅데이터 플랫폼 계층 구조는?",
     "image": null,
@@ -3583,7 +3583,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 15,
     "question": "병렬 DBMS의 특성은?",
     "image": null,
@@ -3601,7 +3601,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 16,
     "question": "빅데이터 분석에 대한 설명은?",
     "image": null,
@@ -3619,7 +3619,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 17,
     "question": "여러 시스템에서 필요한 원천 데이터를 추출하고 변환하여 적재하는 기술은?",
     "image": null,
@@ -3637,7 +3637,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 18,
     "question": "예측을 위한 분석 방법은?",
     "image": null,
@@ -3655,7 +3655,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 19,
     "question": "분석기획에서 비즈니스 계획 수립 절차는?",
     "image": null,
@@ -3673,7 +3673,7 @@
   {
     "year": null,
     "exam_round": "05회",
-    "section": "빅데이터 분석기획",
+    "section": "빅데이터 분석 기획",
     "question_number": 20,
     "question": "데이터 저장 기술은?",
     "image": null,
