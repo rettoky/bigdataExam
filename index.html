@@ -465,6 +465,15 @@
                 const questionData = questions[filteredQuestions[currentQuestionIndex]];
                 const questionId = filteredQuestions[currentQuestionIndex];
                 const wrongCountForQuestion = wrongCounts[questionId] || 0;
+                
+                // 이미지 디버그 로그
+                if (questionData.image && questionData.image !== null && questionData.image !== '') {
+                    console.log('이미지 포함 문제 렌더링:', {
+                        questionId: questionId + 1,
+                        imageValue: questionData.image,
+                        imagePath: `img/${questionData.image}`
+                    });
+                }
 
                 questionContainer.innerHTML = '';
                 
@@ -484,11 +493,13 @@
                             ${wrongCountForQuestion > 0 ? `<div class="wrong-count-badge">틀린 횟수: ${wrongCountForQuestion}</div>` : ''}
                         </div>
                         <h2 class="text-xl md:text-2xl font-bold leading-relaxed text-stone-800">${questionData.question}</h2>
-                        ${questionData.image ? `<div class="mt-4">
+                        ${questionData.image && questionData.image !== null && questionData.image !== '' ? `<div class="mt-4">
                             <img src="img/${questionData.image}" 
                                  alt="문제 이미지" 
                                  class="max-w-full h-auto rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow border border-gray-200"
                                  onclick="showImageModal('img/${questionData.image}')"
+                                 onload="console.log('이미지 로드 성공:', '${questionData.image}')"
+                                 onerror="console.error('이미지 로드 실패:', '${questionData.image}'); this.style.display='none'; this.nextElementSibling.innerHTML='❌ 이미지를 불러올 수 없습니다: ${questionData.image}';"
                                  style="max-height: 400px; object-fit: contain;">
                             <p class="text-xs text-gray-500 mt-2 text-center">이미지를 클릭하면 크게 볼 수 있습니다</p>
                         </div>` : ''}
