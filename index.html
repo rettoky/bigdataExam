@@ -151,6 +151,21 @@
     <!-- Header -->
     <header id="app-header" class="p-4 shadow-lg bg-white/90 backdrop-blur-sm w-full z-40 fixed top-0 left-0">
         <div class="max-w-6xl mx-auto">
+            <!-- Important Notice -->
+            <div class="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                <div class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    <div class="text-xs text-amber-800">
+                        <p class="font-semibold mb-1">📱 데이터 저장 안내</p>
+                        <p class="mb-2">학습 진도와 오답 데이터는 <span class="font-semibold">현재 기기에만 저장</span>되며, 다른 기기나 브라우저에서는 초기화됩니다.</p>
+                        <p class="font-semibold mb-1">⚠️ 기출문제 주의사항</p>
+                        <p>기출문제는 <span class="font-semibold text-red-700">복원 문제</span>로 원본과 차이가 있을 수 있으며, 일부 오류가 포함될 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+            
             <div class="flex items-center justify-between mb-3">
                 <h1 class="text-xl md:text-2xl font-bold text-cyan-600">빅데이터 분석기사 문제집</h1>
                 <div class="flex items-center gap-3">
@@ -225,6 +240,7 @@
             <button id="filter-btn" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full transition-colors">난이도별</button>
             <button id="subject-filter-btn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full transition-colors">과목별</button>
             <button id="exam-round-filter-btn" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full transition-colors">회차별</button>
+            <button id="clear-cache-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition-colors">캐시 초기화</button>
         </div>
         <p class="text-center text-xs text-stone-500 mt-3">좌우 스와이프 또는 화면 좌우 클릭으로 문제를 넘길 수 있습니다.</p>
     </footer>
@@ -1015,6 +1031,27 @@
             filterBtn.addEventListener('click', showFilterModal);
             subjectFilterBtn.addEventListener('click', showSubjectFilterModal);
             examRoundFilterBtn.addEventListener('click', showExamRoundFilterModal);
+            
+            // 캐시 초기화 버튼 이벤트 리스너
+            document.getElementById('clear-cache-btn').addEventListener('click', () => {
+                if (confirm('모든 학습 데이터(진도, 오답노트, 틀린 횟수)를 완전히 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.')) {
+                    // 로컬스토리지 완전 초기화
+                    localStorage.removeItem('currentQuestionIndex');
+                    localStorage.removeItem('wrongAnswers');
+                    localStorage.removeItem('wrongCounts');
+                    
+                    // 변수 초기화
+                    wrongAnswers = {};
+                    wrongCounts = {};
+                    currentQuestionIndex = 0;
+                    
+                    // UI 업데이트
+                    updateWrongCount();
+                    renderQuestion();
+                    
+                    alert('✅ 모든 캐시 데이터가 초기화되었습니다!');
+                }
+            });
 
             // Modal event listeners
             wrongNotesCloseBtn.addEventListener('click', hideWrongNotes);
