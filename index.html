@@ -925,9 +925,36 @@
 
                 sortedRounds.forEach(round => {
                     const count = roundCounts[round];
+                    
+                    // 회차 표시명을 "0000년 00회" 형식으로 통일
+                    let displayRound = round;
+                    
+                    // 다양한 형식을 "0000년 00회" 형식으로 변환
+                    if (round.match(/^\d+회$/)) {
+                        // "04회", "05회", "06회" 형식
+                        const roundNum = round.replace('회', '').padStart(2, '0');
+                        if (roundNum === '04') {
+                            displayRound = '2022년 04회';
+                        } else if (roundNum === '05') {
+                            displayRound = '2022년 05회';
+                        } else if (roundNum === '06') {
+                            displayRound = '2023년 06회';
+                        }
+                    } else if (round.includes('년')) {
+                        // "2021년 제2회", "2021년 3회" 등의 형식 정규화
+                        const yearMatch = round.match(/(\d{4})년/);
+                        const roundMatch = round.match(/제?(\d+)회/);
+                        
+                        if (yearMatch && roundMatch) {
+                            const year = yearMatch[1];
+                            const roundNum = roundMatch[1].padStart(2, '0');
+                            displayRound = `${year}년 ${roundNum}회`;
+                        }
+                    }
+                    
                     optionsHTML += `
                         <button class="exam-round-filter-option text-left p-3 rounded-lg border-2 border-stone-200 hover:border-indigo-400 hover:bg-indigo-50 transition-colors" data-exam-round="${round}">
-                            <span class="font-medium">📝 ${round}</span><br>
+                            <span class="font-medium">📝 ${displayRound}</span><br>
                             <span class="text-xs text-gray-500">(${count}개)</span>
                         </button>
                     `;
