@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>빅데이터분석기사 제11회 기출문제 채점</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 점수 표 스타일 */
+        .score-table {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .score-table h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #495057;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .subject-column {
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .subject-header {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            padding: 0.5rem;
+        }
+
+        .question-item {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .question-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .question-item.correct {
+            background: #d4edda;
+            color: #155724;
+            border-color: #28a745;
+        }
+
+        .question-item.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #dc3545;
+        }
+
+        .question-item.unanswered {
+            background: #f8f9fa;
+            color: #6c757d;
+            border-color: #dee2e6;
+        }
+
+        .question-number {
+            font-size: 0.7rem;
+            margin-bottom: 2px;
+        }
+
+        .question-status {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .subject-section {
+            background: white;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .subject-section-header {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .question {
+            border-bottom: 1px solid #e9ecef;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .question:last-child {
+            border-bottom: none;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .question-number-header {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .feedback {
+            font-size: 2.5rem;
+            font-weight: bold;
+            min-width: 60px;
+            text-align: center;
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        .feedback.correct {
+            color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .feedback.incorrect {
+            color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .feedback.unanswered {
+            color: #6c757d;
+            background: rgba(108, 117, 125, 0.1);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin: 1rem 0 2rem 0;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        .user-answer-label {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 1rem;
+        }
+
+        .options {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .option:hover {
+            border-color: #6c5ce7;
+            background: rgba(108, 92, 231, 0.05);
+        }
+
+        .option.selected {
+            border-color: #6c5ce7;
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        .option.selected.correct {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .option.selected.incorrect {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 0.75rem;
+            transform: scale(1.2);
+        }
+
+        .option-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .unreliable-controls {
+            background: rgba(255, 193, 7, 0.1);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .unreliable-controls h4 {
+            color: #856404;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .unreliable-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .unreliable-btn {
+            background: white;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .unreliable-btn:hover {
+            background: #ffc107;
+            color: white;
+        }
+
+        .unreliable-btn.active.correct {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .unreliable-btn.active.incorrect {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .reliability-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .reliability-badge.높음 {
+            background: rgba(40, 167, 69, 0.2);
+            color: #155724;
+        }
+
+        .reliability-badge.중간 {
+            background: rgba(255, 193, 7, 0.2);
+            color: #856404;
+        }
+
+        .reliability-badge.낮음, .reliability-badge.없음 {
+            background: rgba(220, 53, 69, 0.2);
+            color: #721c24;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        /* 컨트롤 버튼 스타일 */
+        .control-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .control-btn.reset {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+
+        .control-btn.all-correct {
+            background: linear-gradient(135deg, #51cf66, #40c057);
+        }
+
+        .control-btn.all-incorrect {
+            background: linear-gradient(135deg, #ffa8a8, #ff6b6b);
+        }
+
+        .study-room-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .study-room-btn:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+            box-shadow: 0 6px 20px rgba(173, 175, 76, 0.4);
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+        }
+
+        .study-room-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(242, 255, 0, 0.3);
+        }
+
+        .score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-header h2 {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .score-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+
+            .question-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .question {
+                padding: 1rem;
+            }
+
+            .feedback {
+                font-size: 2rem;
+                min-width: 50px;
+            }
+
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .score-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+
+            .score-header h2 {
+                text-align: center;
+            }
+
+            .control-buttons {
+                justify-content: center;
+            }
+
+            .control-btn {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="top">
+        <h1>🎯 빅데이터분석기사 제11회 기출문제 채점</h1>
+        <a href="https://open.kakao.com/o/gIsb0isb" target="_blank" class="study-room-btn">
+            📚 빅데이터분석기사 ADP ADsP 정보공유 카카오톡 스터디방 가기
+        </a>
+        <div style="background: rgba(225, 255, 0, 0.2); padding: 0.75rem 1.5rem; border-radius: 8px; margin-top: 1rem; font-size: 0.95rem; font-weight: 500;">
+            ⚠️ 해당 페이지는 가답안 공개 후 삭제될 예정입니다.
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 점수 현황 표 -->
+        <div class="score-table">
+            <div class="score-header">
+                <h2>📊 채점 현황</h2>
+                <div class="control-buttons">
+                    <button class="control-btn reset" onclick="resetAllAnswers()" title="모든 답안을 초기화합니다">
+                        🔄 채점 초기화
+                    </button>
+                    <button class="control-btn all-correct" onclick="setAllUnreliableCorrect()" title="복원불가 문제를 모두 정답으로 처리합니다">
+                        ✅ 복원불가 → 정답
+                    </button>
+                    <button class="control-btn all-incorrect" onclick="setAllUnreliableIncorrect()" title="복원불가 문제를 모두 오답으로 처리합니다">
+                        ❌ 복원불가 → 오답
+                    </button>
+                </div>
+            </div>
+            <div class="score-grid" id="scoreGrid">
+                <!-- 점수 표가 여기에 동적으로 생성됩니다 -->
+            </div>
+        </div>
+
+        <div id="questionsContainer">
+            <!-- 문제들이 여기에 동적으로 생성됩니다 -->
+        </div>
+
+        <!-- 맨 위로 이동 버튼 -->
+        <button class="back-to-top" onclick="scrollToTop()" title="맨 위로 이동">↑</button>
+    </div>
+
+    <!-- 문제 데이터 로드 -->
+    <script>
+        // --- 복원된 80문제 데이터 ---
+        const examData = [
+            // 1과목 - 빅데이터 분석 기획 (1-20번)
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '데이터사이언티스트의 소프트 스킬을 모두 고른 것은?\n\n가. 발표 전달 능력\n나. 분석기술\n다. 스토리텔링 능력\n라. 빅데이터 이론적지식',
+                options: ['① 가, 나', '② 가, 다', '③ 나, 다', '④ 가, 나, 다'],
+                correctAnswer: 1,
+                questionNumber: 1,
+                reliability: '높음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '빅데이터플랫폼에 대한 설명 중 옳지 않은 것은?',
+                options: ['① [복원불가]', '② 네트워크 스토리지는 2개로 구성된다', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: 1,
+                questionNumber: 2,
+                reliability: '중간'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '맵리듀스 관련된 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 3,
+                reliability: '낮음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '개인정보보호 관련 법률에 해당하지 않는 것은?',
+                options: ['① 금융신용정보보호법', '② 정보통신망법', '③ 공공기관개인정보보호법', '④ 의료법'],
+                correctAnswer: null,
+                questionNumber: 4,
+                reliability: '중간'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '개인정보를 삭제하거나 바꿈으로써 데이터를 섞어도 알아볼 수 없게 하는 방법은?',
+                options: ['① 삭제화', '② 식별화', '③ 익명화', '④ 가명화'],
+                correctAnswer: 2,
+                questionNumber: 5,
+                reliability: '높음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '데이터 분석 접근법 중 하향식 처리에 해당하는 것은?',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 6,
+                reliability: '낮음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: 'HDFS 설명으로 옳은 것은?',
+                options: ['① [복원불가]', '② [복원불가]', '③ 구글 GFS와 같은 오픈소스이다', '④ [복원불가]'],
+                correctAnswer: 2,
+                questionNumber: 7,
+                reliability: '높음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '보기에 해당하는 답\n\n[보기]\n자바스크립트에서 데이터를 주고받기 위한 텍스트 형식입니다.',
+                options: ['① CSV', '② JSON', '③ [복원불가]', '④ HBase'],
+                correctAnswer: 1,
+                questionNumber: 8,
+                reliability: '높음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '데이터 전처리 과정에서 노이즈 제거 방법으로 옳은 것은?',
+                options: ['① 스무딩', '② 정규화', '③ 이산화', '④ 총계'],
+                correctAnswer: 0,
+                questionNumber: 9,
+                reliability: '중간'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: 'CRISP-DM 프로세스 첫번째 순서는?',
+                options: ['① 데이터준비', '② 업무이해', '③ 데이터이해', '④ 모델링'],
+                correctAnswer: 1,
+                questionNumber: 10,
+                reliability: '높음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '데이터 품질 보기에 해당하는 것은?\n\n[보기] 데이터 규칙과 범위가 있다.',
+                options: ['① 완전성', '② 일관성', '③ 유효성', '④ 적시성'],
+                correctAnswer: 2,
+                questionNumber: 11,
+                reliability: '높음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '정성적 평가에 해당하는 것은? (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 12,
+                reliability: '낮음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '분산파일시스템에 대한 설명으로 옳은 것은?',
+                options: ['① 고장나도 서비스 중단 안된다', '② 여러개로 여러개 한다(마이크로프로세스)', '③ 한 서버에서 데이터 주고 받을 수 있음', '④ [복원불가]'],
+                correctAnswer: 0,
+                questionNumber: 13,
+                reliability: '중간'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '비즈니스모델 캔버스 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 14,
+                reliability: '낮음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '빅데이터의 예측으로 인해 피해보는 사람이 생길 수 있다는 내용은?',
+                options: ['① [복원불가]', '② 데이터오용', '③ [복원불가]', '④ 책임훼손'],
+                correctAnswer: 3,
+                questionNumber: 15,
+                reliability: '중간'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '아래 설명에 부합하는 데이터유형은?\n\n구조가 바뀌고, 메타데이터로 활용된다.',
+                options: ['① 정형데이터', '② 비정형데이터', '③ 반정형데이터', '④ 미정형데이터'],
+                correctAnswer: 2,
+                questionNumber: 16,
+                reliability: '높음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '17번 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 17,
+                reliability: '낮음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '18번 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 18,
+                reliability: '낮음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '19번 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 19,
+                reliability: '낮음'
+            },
+            {
+                subject: '1과목 - 빅데이터 분석 기획',
+                question: '20번 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 20,
+                reliability: '낮음'
+            },
+
+            // 2과목 - 빅데이터 탐색 (21-40번)
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '완전 분석 vs 다중대치법 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 21,
+                reliability: '낮음'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '단계적 선택법 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 22,
+                reliability: '낮음'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '박스플롯에 대한 설명 중 맞는 것은?',
+                options: ['① 박스플롯 내에 있는게 이상치다', '② 평균 + 1.5 사분위수', '③ 양수값들일때 로그변환하면 이상치 결과 달라질 수도 있다', '④ 중앙값에서 1.5 이상 이상치다'],
+                correctAnswer: 2,
+                questionNumber: 23,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: 'Z-SCORE에 대한 설명 중 가장 올바른 것은?',
+                options: ['① 표본이 많으면 중심극한정리를 적용한다', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: 0,
+                questionNumber: 24,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '주성분 분석과 관련된 설명 중 틀린 것은?',
+                options: ['① 주성분의 상관관계는 0이다', '② [복원불가]', '③ 주성분은 변수들의 선형 결합 변환', '④ 각 변수가 서로 독립이라면, 주성분은 모든 변수에 연관성을 가진다'],
+                correctAnswer: 3,
+                questionNumber: 25,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '변수변환 시 부호가 바뀌는 것은?',
+                options: ['① Min-Max', '② 로그', '③ 정규화', '④ 역수'],
+                correctAnswer: 3,
+                questionNumber: 26,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '상관이 바뀌는 것은? (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 27,
+                reliability: '낮음'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '왜도>0일 때의 관계는?',
+                options: ['① 평균>중앙값>최빈값', '② 최빈값>중앙값>평균', '③ 중앙값>평균>최빈값', '④ 평균>최빈값>중앙값'],
+                correctAnswer: 0,
+                questionNumber: 28,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '질병이 기하급수로 늘어나는 그래프 표현 문제',
+                options: ['① x축 선형', '② y축 선형', '③ x축 로그', '④ y축 로그'],
+                correctAnswer: 3,
+                questionNumber: 29,
+                reliability: '높음'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '선거 연령대별로 랜덤하게 추출하는 방식은?',
+                options: ['① 단순랜덤추출', '② 계통추출', '③ 층화추출', '④ 집락추출'],
+                correctAnswer: 2,
+                questionNumber: 30,
+                reliability: '높음'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '원핫인코딩 관련 설명 중 틀린 것은?',
+                options: ['① 범주형 변수를 이진 벡터로 만든다', '② [복원불가]', '③ 효율성 좋아진다', '④ [복원불가]'],
+                correctAnswer: 2,
+                questionNumber: 31,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '빅데이터분석 방법 중 회귀분석시 ANOVA를 쓰는 이유 중 아닌 것은?',
+                options: ['① 독립종속변수', '② 등분산성', '③ 잔차가 다르다', '④ 회귀식'],
+                correctAnswer: 2,
+                questionNumber: 32,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '표본 25명이고, 키 평균은 170cm, 표준오차는 5cm (신뢰구간 95%)일 때 t-검정표 보고 오차범위는?',
+                options: ['① 168.289, 171.711', '② 168.292, 171.708', '③ 167.936, 172.064', '④ 167.94, 172.06'],
+                correctAnswer: 3,
+                questionNumber: 33,
+                reliability: '높음'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '주성분 분석 관련해서 틀린 것은?',
+                options: ['① [복원불가]', '② [복원불가]', '③ 주성분은 변수들의 선형 결합 변환', '④ 각 변수가 서로 독립이라면, 주성분은 모든 변수에 연관성을 가진다'],
+                correctAnswer: 3,
+                questionNumber: 34,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '계층적 군집분석 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 35,
+                reliability: '낮음'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '베이지안 정리 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 36,
+                reliability: '낮음'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '점추정의 성질로 옳은 것은?',
+                options: ['① 불편성', '② 일치성', '③ 효율성', '④ 충족성'],
+                correctAnswer: 2,
+                questionNumber: 37,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '불량률이 0.01일 때 1000개의 표본을 뽑아서 정규분포 근사할 때 옳은 것은?',
+                options: ['① N(0.01, 0.99)', '② N(0.01, 9.9)', '③ N(10, 0.99)', '④ N(10, 9.9)'],
+                correctAnswer: 3,
+                questionNumber: 38,
+                reliability: '중간'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '표본 데이터수가 n개일때 배치경사하강법, 확률적경사하강법, 미니배치로 적절한 것은?',
+                options: ['① N, 1, N/k', '② 1, 1, N/k', '③ N, N, N/k', '④ 1, N, N/k'],
+                correctAnswer: 0,
+                questionNumber: 39,
+                reliability: '높음'
+            },
+            {
+                subject: '2과목 - 빅데이터 탐색',
+                question: '변수변환 전후 상관계수가 변하지 않는 것은?',
+                options: ['① X: Min-Max, Y: 박스콕스 (λ=1)', '② X: z-score, Y: 로그', '③ X: Min-Max, Y: 박스콕스 (λ=-1)', '④ X: z-score, Y: 제곱근'],
+                correctAnswer: 0,
+                questionNumber: 40,
+                reliability: '중간'
+            },
+
+            // 3과목 - 빅데이터 모델링 (41-60번)
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: 'X1, X2 교호작용은?',
+                options: ['① X1+X2', '② X1×X2', '③ X1/X2', '④ X1-X2'],
+                correctAnswer: 1,
+                questionNumber: 41,
+                reliability: '높음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '행이 r(≥2), 열이 c(≥2)인 교차표에서 자유도는?',
+                options: ['① rc', '② rc-1', '③ (r-1)(c-1)', '④ r+c-1'],
+                correctAnswer: 2,
+                questionNumber: 42,
+                reliability: '높음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '키가 160, 170, 180이고, 몸무게가 60, 65, 70인 사람들의 표본 공분산은?',
+                options: ['① 50', '② 75', '③ 100', '④ 150'],
+                correctAnswer: 1,
+                questionNumber: 43,
+                reliability: '높음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '지니지수와 엔트로피 지수에 대한 설명 중 틀린 것은?',
+                options: ['① [복원불가]', '② 엔트로피가 큰 것으로 자식 마디 분기', '③ 지니 지수가 작은 것으로 자식 마디 분기', '④ [복원불가]'],
+                correctAnswer: 1,
+                questionNumber: 44,
+                reliability: '중간'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: 'GRM, 순환 모델에 해당하는 것은?',
+                options: ['① RNN', '② DNN', '③ FFNN', '④ [복원불가]'],
+                correctAnswer: 0,
+                questionNumber: 45,
+                reliability: '높음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '로지스틱 회귀분석에 대한 설명 중 옳지 않는 것은?',
+                options: ['① 와드로 검증', '② [복원불가]', '③ AIC로 검증', '④ [복원불가]'],
+                correctAnswer: 0,
+                questionNumber: 46,
+                reliability: '중간'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: 'GLM 모형의 구성요소는?\n\nㄱ. 연결함수\nㄴ. 종속변수 분포\nㄷ. 적절한 변수 선택',
+                options: ['① ㄱ, ㄴ', '② ㄴ, ㄷ', '③ ㄱ, ㄷ', '④ ㄱ, ㄴ, ㄷ'],
+                correctAnswer: 0,
+                questionNumber: 47,
+                reliability: '중간'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '회귀분석 가정 중 잔차가 정규분포를 따라야 한다는 것은? (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 48,
+                reliability: '낮음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '부스팅 관련 문제 - 약분류기 관련 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 49,
+                reliability: '낮음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '확률적 경사 하강법 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 50,
+                reliability: '낮음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '인공신경망 시그모이드 관련 설명 중 틀린 것은?',
+                options: ['① 시그모이드 함수 관련, 회귀에서는 오차 역전파 말고 조건부 확률 사용', '② 입력함수를 열린 함수에서 닫힌 함수로', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: 0,
+                questionNumber: 51,
+                reliability: '낮음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '드롭아웃 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 52,
+                reliability: '낮음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: 'SVM 초평면 최적 결정선 기준으로 가장 적절한 것은?',
+                options: ['① [복원불가]', '② 클래스별 하나의 변수 선택', '③ 완전분리', '④ 직선'],
+                correctAnswer: null,
+                questionNumber: 53,
+                reliability: '낮음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '수박을 산 사람이 사과를 구매할 신뢰도는?\n\nA: 수박 사과 파인애플\nB: 수박 포도 귤\nC: 수박 딸기 사과\nD: 수박 사과 귤\nE: 사과',
+                options: ['① 1/2', '② 3/4', '③ 4/5', '④ 3/5'],
+                correctAnswer: 1,
+                questionNumber: 54,
+                reliability: '높음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '계층적 군집분석 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 55,
+                reliability: '낮음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: 'K개수 설정을 필요로 하지 않는 군집방법은?',
+                options: ['① K-Means', '② DBSCAN', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: 1,
+                questionNumber: 56,
+                reliability: '높음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '마약 전체 약 남용자 5%, 약 반응 93%, 미반응 97% 베이지안 문제',
+                options: ['① 93%', '② 78%', '③ 62%', '④ 57%'],
+                correctAnswer: 2,
+                questionNumber: 57,
+                reliability: '높음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '시계열에서 슬라이딩 윈도우 사용 목적은?',
+                options: ['① [복원불가]', '② 시계열 변화 패턴 감지', '③ 공간적 변화 패턴 감지', '④ 이상치 제거'],
+                correctAnswer: 1,
+                questionNumber: 58,
+                reliability: '높음'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '시계열 관련해서 틀린 설명은?',
+                options: ['① ACF로 비정상성을 정상으로 바꾼다', '② 로그로 분산을 줄인다', '③ 차분으로 추세성을 제거한다', '④ 이동평균으로 계절성을 제거한다'],
+                correctAnswer: 0,
+                questionNumber: 59,
+                reliability: '중간'
+            },
+            {
+                subject: '3과목 - 빅데이터 모델링',
+                question: '비모수 검정 설명이 틀린 것은?',
+                options: ['① 윌콕슨 순위합검정', '② 부호검정: 같은지 크거나 작은지', '③ 만-휘트니 U: 집단간 평균', '④ 크루스칼-왈리스: 3개집단'],
+                correctAnswer: 2,
+                questionNumber: 60,
+                reliability: '중간'
+            },
+
+            // 4과목 - 빅데이터 결과 해석 (61-80번)
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: 'F1 score에 대한 설명 중 틀린 것은?',
+                options: ['① F1 score 수식의 분모, 분자 위치 변경', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: 0,
+                questionNumber: 61,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: 'ROC 커브 관련 문제',
+                options: ['① ROC 커브로 오분류표를 만들 수 있다', '② FPR과 TPR을 이용하였다', '③ 면적이 커야 좋다', '④ confusion matrix 나타낼 수 없음'],
+                correctAnswer: 2,
+                questionNumber: 62,
+                reliability: '중간'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: 'AIC에 대한 설명 중 틀린 것은?',
+                options: ['① AIC가 높을수록 좋다', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: 0,
+                questionNumber: 63,
+                reliability: '중간'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '인공신경망의 초매개변수에 해당하는 것은?\n\nㄱ. 가중치 ㄴ. 편향 ㄷ. 은닉층 개수 ㄹ. 은닉층 내 노드 개수',
+                options: ['① ㄷ, ㄹ', '② ㄱ, ㄷ, ㄹ', '③ ㄴ, ㄷ, ㄹ', '④ ㄱ, ㄴ, ㄷ, ㄹ'],
+                correctAnswer: 0,
+                questionNumber: 64,
+                reliability: '높음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '하이퍼파라미터 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 65,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '모멘텀 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 66,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '최적화 알고리즘에 해당하는 것은?',
+                options: ['① [복원불가]', '② [복원불가]', '③ Adagrad', '④ ADAM'],
+                correctAnswer: 3,
+                questionNumber: 67,
+                reliability: '높음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '과대적합을 줄이는 방법으로 적절하지 않은 것은?',
+                options: ['① 은닉층 감소', '② 노드 감소', '③ 데이터 수 늘리기', '④ 에포크 수 늘리기'],
+                correctAnswer: 3,
+                questionNumber: 68,
+                reliability: '높음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '시각화 관련 - 기능적, 심미적 둘 다 챙기기 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 69,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '인포그래픽 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 70,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '점그래프는 시간 표현이 불가능하다는 내용 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 71,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '버블차트 원크기 관련 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 72,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '학습률에 영향을 주는 요소들 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 73,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '데이터셋을 훈련, 검증, 테스트용으로 구분하는 방법은?',
+                options: ['① 홀드아웃', '② 케이폴드', '③ 부트스트랩', '④ Leave-one-out'],
+                correctAnswer: 0,
+                questionNumber: 74,
+                reliability: '높음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '깁스샘플링에 대한 설명 중 틀린 것은?',
+                options: ['① 초기 수집한 데이터를 버린다', '② [복원불가]', '③ 값으로 수렴 확인한다', '④ [복원불가]'],
+                correctAnswer: 2,
+                questionNumber: 75,
+                reliability: '중간'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: 'TF-IDF에 대한 설명 중 틀린 것은?',
+                options: ['① [복원불가]', '② 유사도가 높은 문서일수록 0에 가까워진다', '③ inverse여서 올라간다', '④ 순위 결정할 수 없다'],
+                correctAnswer: 3,
+                questionNumber: 76,
+                reliability: '높음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '77번 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 77,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '78번 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 78,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '79번 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 79,
+                reliability: '낮음'
+            },
+            {
+                subject: '4과목 - 빅데이터 결과 해석',
+                question: '80번 문제 (복원불가)',
+                options: ['① [복원불가]', '② [복원불가]', '③ [복원불가]', '④ [복원불가]'],
+                correctAnswer: null,
+                questionNumber: 80,
+                reliability: '낮음'
+            }
+        ];
+        
+        let userAnswers = {};
+        let userCorrectChoices = {}; // 복원불가 문제에 대한 사용자의 정답/오답 선택
+        
+        // 로컬 스토리지 키
+        const STORAGE_KEY = 'bigdata_exam_answers';
+        const CORRECT_CHOICES_KEY = 'bigdata_exam_correct_choices';
+
+        // 초기화
+        function init() {
+            console.log('초기화 시작, 문제 수:', examData.length);
+            loadAnswersFromStorage();
+            renderScoreGrid();
+            renderQuestions();
+        }
+
+        // 로컬 스토리지에서 답안 로드
+        function loadAnswersFromStorage() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                userAnswers = JSON.parse(saved);
+            }
+            
+            const savedChoices = localStorage.getItem(CORRECT_CHOICES_KEY);
+            if (savedChoices) {
+                userCorrectChoices = JSON.parse(savedChoices);
+            }
+        }
+
+        // 로컬 스토리지에 답안 저장
+        function saveAnswersToStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(userAnswers));
+            localStorage.setItem(CORRECT_CHOICES_KEY, JSON.stringify(userCorrectChoices));
+        }
+
+        // 점수 현황 표 렌더링
+        function renderScoreGrid() {
+            const container = document.getElementById('scoreGrid');
+            container.innerHTML = '';
+
+            const subjects = [
+                { name: '1과목\n빅데이터 분석 기획', start: 1, end: 20 },
+                { name: '2과목\n빅데이터 탐색', start: 21, end: 40 },
+                { name: '3과목\n빅데이터 모델링', start: 41, end: 60 },
+                { name: '4과목\n빅데이터 결과 해석', start: 61, end: 80 }
+            ];
+
+            subjects.forEach(subject => {
+                const column = document.createElement('div');
+                column.className = 'subject-column';
+
+                const header = document.createElement('div');
+                header.className = 'subject-header';
+                header.textContent = subject.name;
+                column.appendChild(header);
+
+                const questionGrid = document.createElement('div');
+                questionGrid.className = 'question-grid';
+
+                for (let i = subject.start; i <= subject.end; i++) {
+                    const questionItem = document.createElement('div');
+                    questionItem.className = 'question-item';
+                    questionItem.onclick = () => scrollToQuestion(i);
+                    
+                    const feedback = getFeedback(i);
+                    questionItem.classList.add(feedback.class);
+
+                    const questionNumber = document.createElement('div');
+                    questionNumber.className = 'question-number';
+                    questionNumber.textContent = i;
+
+                    const questionStatus = document.createElement('div');
+                    questionStatus.className = 'question-status';
+                    questionStatus.textContent = feedback.text;
+
+                    questionItem.appendChild(questionNumber);
+                    questionItem.appendChild(questionStatus);
+                    questionGrid.appendChild(questionItem);
+                }
+
+                column.appendChild(questionGrid);
+                container.appendChild(column);
+            });
+        }
+
+        // 특정 문제로 스크롤
+        function scrollToQuestion(questionNumber) {
+            const questionElement = document.getElementById(`question-${questionNumber}`);
+            if (questionElement) {
+                questionElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+        }
+
+        // 맨 위로 스크롤
+        function scrollToTop() {
+            document.getElementById('top').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // 문제 렌더링
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+
+            const subjects = {
+                '1과목 - 빅데이터 분석 기획': [],
+                '2과목 - 빅데이터 탐색': [],
+                '3과목 - 빅데이터 모델링': [],
+                '4과목 - 빅데이터 결과 해석': []
+            };
+
+            // 과목별로 문제 분류
+            examData.forEach(question => {
+                subjects[question.subject].push(question);
+            });
+
+            // 각 과목별로 섹션 생성
+            Object.keys(subjects).forEach(subjectName => {
+                const questions = subjects[subjectName];
+                if (questions.length === 0) return;
+
+                const section = document.createElement('div');
+                section.className = 'subject-section';
+
+                const header = document.createElement('div');
+                header.className = 'subject-section-header';
+                header.textContent = subjectName;
+                section.appendChild(header);
+
+                questions.forEach(question => {
+                    const questionDiv = createQuestionElement(question);
+                    section.appendChild(questionDiv);
+                });
+
+                container.appendChild(section);
+            });
+
+            // 이벤트 리스너 추가
+            addEventListeners();
+        }
+
+        // 개별 문제 요소 생성
+        function createQuestionElement(question) {
+            const div = document.createElement('div');
+            div.className = 'question';
+            div.id = `question-${question.questionNumber}`;
+            
+            const feedback = getFeedback(question.questionNumber);
+            const userAnswer = userAnswers[question.questionNumber];
+            const isUnreliable = question.correctAnswer === null;
+            
+            let questionHtml = '';
+            
+            if (question.reliability) {
+                questionHtml += `<div class="reliability-badge ${question.reliability}">복원율: ${question.reliability}</div>`;
+            }
+            
+            questionHtml += `
+                <div class="question-header">
+                    <div class="question-number-header">문제 ${question.questionNumber}번</div>
+                </div>
+
+                <div class="question-text">${question.question}</div>
+            `;
+            
+            // 복원불가 문제인 경우 특별한 UI 추가
+            if (isUnreliable) {
+                const userChoice = userCorrectChoices[question.questionNumber];
+                questionHtml += `
+                    <div class="unreliable-controls">
+                        <h4>⚠️ 복원불가 문제 - 임의 채점 선택:</h4>
+                        <div class="unreliable-buttons">
+                            <button class="unreliable-btn ${userChoice === 'correct' ? 'active correct' : ''}" 
+                                    data-question="${question.questionNumber}" 
+                                    data-choice="correct">
+                                ✅ 정답으로 처리
+                            </button>
+                            <button class="unreliable-btn ${userChoice === 'incorrect' ? 'active incorrect' : ''}" 
+                                    data-question="${question.questionNumber}" 
+                                    data-choice="incorrect">
+                                ❌ 오답으로 처리
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            questionHtml += `
+                <div class="user-answer-label">📝 내가 시험에서 선택한 답안:</div>
+                
+                <div class="options">
+                    ${question.options.map((option, index) => `
+                        <label class="option ${userAnswer === index ? getOptionClass(question.questionNumber, index) : ''}" 
+                               data-question="${question.questionNumber}" data-answer="${index}">
+                            <input type="radio" 
+                                   name="q${question.questionNumber}" 
+                                   value="${index}"
+                                   ${userAnswer === index ? 'checked' : ''}
+                                   ${isUnreliable ? 'disabled' : ''}
+                                   data-question="${question.questionNumber}" 
+                                   data-answer="${index}">
+                            <span class="option-text">${option}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+
+            div.innerHTML = questionHtml;
+            return div;
+        }
+
+        // 이벤트 리스너 추가
+        function addEventListeners() {
+            // 라디오 버튼 변경 이벤트
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const questionNumber = parseInt(this.dataset.question);
+                    const answerIndex = parseInt(this.dataset.answer);
+                    selectAnswer(questionNumber, answerIndex);
+                });
+            });
+
+            // 라벨 클릭 이벤트
+            document.querySelectorAll('.option').forEach(label => {
+                label.addEventListener('click', function(e) {
+                    const questionNumber = parseInt(this.dataset.question);
+                    const answerIndex = parseInt(this.dataset.answer);
+                    const radio = this.querySelector('input[type="radio"]');
+                    
+                    if (!radio.disabled) {
+                        radio.checked = true;
+                        selectAnswer(questionNumber, answerIndex);
+                    }
+                });
+            });
+
+            // 복원불가 문제 정답/오답 선택 버튼 이벤트
+            document.querySelectorAll('.unreliable-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const questionNumber = parseInt(this.dataset.question);
+                    const choice = this.dataset.choice;
+                    selectCorrectChoice(questionNumber, choice);
+                });
+            });
+        }
+
+        // 답안 선택
+        function selectAnswer(questionNumber, answerIndex) {
+            const question = examData.find(q => q.questionNumber === questionNumber);
+            
+            // 복원불가 문제는 선택 불가
+            if (question.correctAnswer === null) return;
+            
+            userAnswers[questionNumber] = answerIndex;
+            saveAnswersToStorage();
+            
+            // 점수표와 문제 모두 다시 렌더링
+            renderScoreGrid();
+            renderQuestions();
+        }
+
+        // 복원불가 문제 정답/오답 선택
+        function selectCorrectChoice(questionNumber, choice) {
+            userCorrectChoices[questionNumber] = choice;
+            
+            // 복원불가 문제도 답안을 선택했다고 가정 (더미 답안)
+            userAnswers[questionNumber] = 0;
+            
+            saveAnswersToStorage();
+            
+            // 점수표와 문제 모두 다시 렌더링
+            renderScoreGrid();
+            renderQuestions();
+        }
+
+        // 피드백 정보 계산
+        function getFeedback(questionNumber) {
+            const question = examData.find(q => q.questionNumber === questionNumber);
+            if (!question) return { text: '?', class: 'unanswered' };
+            
+            const userAnswer = userAnswers[questionNumber];
+
+            // 복원불가 문제인 경우
+            if (question.correctAnswer === null) {
+                const userChoice = userCorrectChoices[questionNumber];
+                if (userChoice === undefined) {
+                    return { text: '?', class: 'unanswered' };
+                }
+                
+                if (userChoice === 'correct') {
+                    return { text: 'O', class: 'correct' };
+                } else {
+                    return { text: 'X', class: 'incorrect' };
+                }
+            }
+
+            // 일반 문제인 경우
+            if (userAnswer === undefined) {
+                return { text: '?', class: 'unanswered' };
+            }
+
+            if (userAnswer === question.correctAnswer) {
+                return { text: 'O', class: 'correct' };
+            } else {
+                return { text: 'X', class: 'incorrect' };
+            }
+        }
+
+        // 선택지 클래스 계산
+        function getOptionClass(questionNumber, selectedIndex) {
+            const question = examData.find(q => q.questionNumber === questionNumber);
+            
+            if (question.correctAnswer === null) return 'selected';
+            
+            if (selectedIndex === question.correctAnswer) {
+                return 'selected correct';
+            } else {
+                return 'selected incorrect';
+            }
+        }
+
+        // 모든 답안 초기화
+        function resetAllAnswers() {
+            if (confirm('⚠️ 정말로 모든 답안을 초기화하시겠습니까?\n\n입력한 모든 답안과 복원불가 문제 설정이 삭제됩니다.')) {
+                // 로컬 스토리지 초기화
+                localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(CORRECT_CHOICES_KEY);
+                
+                // 메모리 초기화
+                userAnswers = {};
+                userCorrectChoices = {};
+                
+                // UI 재렌더링
+                renderScoreGrid();
+                renderQuestions();
+                
+                alert('✅ 모든 답안이 초기화되었습니다.');
+            }
+        }
+
+        // 모든 복원불가 문제를 정답으로 처리
+        function setAllUnreliableCorrect() {
+            let unreliableCount = 0;
+            
+            examData.forEach(question => {
+                if (question.correctAnswer === null) {
+                    userCorrectChoices[question.questionNumber] = 'correct';
+                    // 복원불가 문제도 답안을 선택했다고 가정 (더미 답안)
+                    userAnswers[question.questionNumber] = 0;
+                    unreliableCount++;
+                }
+            });
+            
+            if (unreliableCount > 0) {
+                saveAnswersToStorage();
+                renderScoreGrid();
+                renderQuestions();
+                alert(`✅ ${unreliableCount}개의 복원불가 문제를 모두 정답으로 처리했습니다.`);
+            } else {
+                alert('ℹ️ 복원불가 문제가 없습니다.');
+            }
+        }
+
+        // 모든 복원불가 문제를 오답으로 처리
+        function setAllUnreliableIncorrect() {
+            let unreliableCount = 0;
+            
+            examData.forEach(question => {
+                if (question.correctAnswer === null) {
+                    userCorrectChoices[question.questionNumber] = 'incorrect';
+                    // 복원불가 문제도 답안을 선택했다고 가정 (더미 답안)
+                    userAnswers[question.questionNumber] = 0;
+                    unreliableCount++;
+                }
+            });
+            
+            if (unreliableCount > 0) {
+                saveAnswersToStorage();
+                renderScoreGrid();
+                renderQuestions();
+                alert(`❌ ${unreliableCount}개의 복원불가 문제를 모두 오답으로 처리했습니다.`);
+            } else {
+                alert('ℹ️ 복원불가 문제가 없습니다.');
+            }
+        }
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
