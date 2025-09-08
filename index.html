@@ -79,6 +79,27 @@
             font-size: 0.9rem;
         }
 
+        .subject-score {
+            background: #f8f9fa;
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+            border-top: 1px solid #dee2e6;
+            color: #495057;
+        }
+
+        .average-score {
+            background: #e3f2fd;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #1976d2;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 2px solid #bbdefb;
+        }
+
         .question-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1184,7 +1205,6 @@
 
         // 초기화
         function init() {
-            console.log('초기화 시작, 문제 수:', examData.length);
             loadAnswersFromStorage();
             renderScoreGrid();
             renderQuestions();
@@ -1207,6 +1227,24 @@
         function saveAnswersToStorage() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(userAnswers));
             localStorage.setItem(CORRECT_CHOICES_KEY, JSON.stringify(userCorrectChoices));
+        }
+
+        // 과목별 점수 계산 함수
+        function calculateSubjectScore(start, end) {
+            let correct = 0;
+            let total = 0;
+            for (let i = start; i <= end; i++) {
+                const feedback = getFeedback(i);
+                if (feedback.class === 'correct') {
+                    correct++;
+                }
+                if (feedback.class !== 'unanswered') {
+                    total++;
+                }
+            }
+            // 1문제당 5점씩 계산
+            const score = correct * 5;
+            return { correct, total, score };
         }
 
         // 점수 현황 표 렌더링
@@ -1255,8 +1293,51 @@
                 }
 
                 column.appendChild(questionGrid);
+                
+                // 과목별 점수 추가
+                const subjectResult = calculateSubjectScore(subject.start, subject.end);
+                const scoreDiv = document.createElement('div');
+                scoreDiv.className = 'subject-score';
+                if (subjectResult.total > 0) {
+                    scoreDiv.innerHTML = `📊 ${subjectResult.correct}/20<br>점수: ${subjectResult.score}점`;
+                } else {
+                    scoreDiv.innerHTML = `📊 0/20<br>점수: 0점`;
+                }
+                column.appendChild(scoreDiv);
+                
                 container.appendChild(column);
             });
+            
+            // 전체 평균 계산 및 표시
+            const scoreSubjects = [
+                { name: '1과목', start: 1, end: 20 },
+                { name: '2과목', start: 21, end: 40 },
+                { name: '3과목', start: 41, end: 60 },
+                { name: '4과목', start: 61, end: 80 }
+            ];
+            
+            let totalScore = 0;
+            let subjectCount = 0;
+            
+            scoreSubjects.forEach(subject => {
+                const result = calculateSubjectScore(subject.start, subject.end);
+                totalScore += result.score;
+                if (result.total > 0) {
+                    subjectCount++;
+                }
+            });
+            
+            // 전체 평균 추가
+            const averageDiv = document.createElement('div');
+            averageDiv.className = 'average-score';
+            const totalPossible = 400; // 4과목 × 20문제 × 5점 = 400점
+            if (subjectCount > 0) {
+                const average = (totalScore / 4).toFixed(1); // 4과목으로 나누어 과목별 평균
+                averageDiv.innerHTML = `🎯 총점: ${totalScore}/${totalPossible}점 | 과목평균: ${average}점`;
+            } else {
+                averageDiv.innerHTML = `🎯 총점: 0/${totalPossible}점 | 과목평균: 0점`;
+            }
+            container.appendChild(averageDiv);
         }
 
         // 특정 문제로 스크롤
@@ -1280,17 +1361,16 @@
         // 문제 렌더링
         function renderQuestions() {
             const container = document.getElementById('questionsContainer');
+            if (!container) return;
+            
             container.innerHTML = '';
 
-            const subjects = {
-                '1과목 - 빅데이터 분석 기획': [],
-                '2과목 - 빅데이터 탐색': [],
-                '3과목 - 빅데이터 모델링': [],
-                '4과목 - 빅데이터 결과 해석': []
-            };
-
             // 과목별로 문제 분류
+            const subjects = {};
             examData.forEach(question => {
+                if (!subjects[question.subject]) {
+                    subjects[question.subject] = [];
+                }
                 subjects[question.subject].push(question);
             });
 
@@ -1314,7 +1394,7 @@
 
                 container.appendChild(section);
             });
-
+            
             // 이벤트 리스너 추가
             addEventListeners();
         }
